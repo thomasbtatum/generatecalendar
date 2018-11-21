@@ -21,9 +21,13 @@ namespace GenerateCalendar.Controllers
 
 
         [HttpGet]
-        public IActionResult GetCalendar()
+        public IActionResult GetCalendar(string year)
         {
-            var ms = _calendarService.GeneratedPackage();
+            int defaultYear = DateTime.Now.Year;
+            if (!int.TryParse(year, out defaultYear))
+                defaultYear = DateTime.Now.Year;
+
+            var ms = _calendarService.GeneratePackage(defaultYear);
             var filename = "calendar.docx";
             var fileContentResult = new FileContentResult(ms.ToArray(), "application/octet-stream")
             {

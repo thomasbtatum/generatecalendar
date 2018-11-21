@@ -17,20 +17,23 @@ namespace GenerateCalendar.Services
 {
     public class CalendarService : ICalendarService
     {
+
+        private int _year = System.DateTime.Now.Year;
         // Creates a WordprocessingDocument.
-        public MemoryStream GeneratedPackage()
+        public MemoryStream GeneratePackage(int year)
         {
+            _year = year;
             var ms = new MemoryStream();
             using (WordprocessingDocument package = WordprocessingDocument.Create(ms, WordprocessingDocumentType.Document))
             {
-                CreateParts(package);
+                CreateParts(package, year);
             }
 
             return ms;
         }
 
         // Adds child parts and generates content of the specified part.
-        private void CreateParts(WordprocessingDocument document)
+        private void CreateParts(WordprocessingDocument document, int year)
         {
             ExtendedFilePropertiesPart extendedFilePropertiesPart1 = document.AddNewPart<ExtendedFilePropertiesPart>("rId3");
             GenerateExtendedFilePropertiesPart1Content(extendedFilePropertiesPart1);
@@ -417,7 +420,7 @@ namespace GenerateCalendar.Services
             runProperties4.Append(fontSize5);
             runProperties4.Append(fontSizeComplexScript5);
             Text text4 = new Text();
-            text4.Text = "20";
+            text4.Text = _year.ToString().Substring(0,2);
 
             run4.Append(runProperties4);
             run4.Append(text4);
@@ -433,7 +436,7 @@ namespace GenerateCalendar.Services
             runProperties5.Append(fontSize6);
             runProperties5.Append(fontSizeComplexScript6);
             Text text5 = new Text();
-            text5.Text = "XX";
+            text5.Text = _year.ToString().Substring(2);
 
             run5.Append(runProperties5);
             run5.Append(text5);

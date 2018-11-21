@@ -4,6 +4,6 @@ namespace GenerateCalendar.Services
 {
     public interface ICalendarService
     {
-        MemoryStream GeneratedPackage();
+        MemoryStream GeneratePackage(int year);
     }
 }

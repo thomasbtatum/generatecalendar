@@ -14,5 +14,5 @@
     "template"      : "serverless.template",
     "template-parameters" : "\"ShouldCreateBucket\"=\"true\";\"BucketName\"=\"\"",
     "s3-bucket"           : "amplifyjsapp-20180923103802-deployment",
-    "stack-name"          : "GenerateCalendar"
+    "stack-name"          : "GenerateCalendarNew"
 }
